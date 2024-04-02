@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../AuthProvider';
 
 const Register = () => {
   const [isPassVisible, setIsPassVisible] = useState(false);
+
+  const { createUser } = useContext(AuthContext);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -9,6 +12,14 @@ const Register = () => {
     const password = e.target.password.value;
     const isTermsAccepted = e.target.terms.checked;
     const name = e.target.name.value;
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div>
