@@ -4,7 +4,12 @@ import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <p className="text-indigo-600 text-center">Loading....</p>;
+  }
+
   if (user) {
     return children;
   }
