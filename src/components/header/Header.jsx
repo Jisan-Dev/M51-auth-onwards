@@ -32,6 +32,11 @@ const Header = () => {
               <li>
                 <NavLink to="/orders">Orders</NavLink>
               </li>
+              {user && (
+                <li>
+                  <NavLink to="/profile">profile</NavLink>
+                </li>
+              )}
             </ul>
             {user && (
               <>
