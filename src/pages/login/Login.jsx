@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [isPassVisible, setIsPassVisible] = useState(false);
 
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -18,6 +18,15 @@ const Login = () => {
       .then((result) => {
         console.log(result);
         e.target.reset();
+        navigate('/');
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const googleHandler = () => {
+    signInWithGoogle()
+      .then((result) => {
+        console.log(result.user);
         navigate('/');
       })
       .catch((error) => console.error(error));
@@ -51,6 +60,9 @@ const Login = () => {
           <input type="submit" value="Login" className="btn btn-outline btn-primary uppercase tracking-wider text-base w-full mt-2" />
           {/* <button className="btn btn-outline btn-primary w-full">Register</button> */}
         </div>
+        <button onClick={googleHandler} className="btn btn-outline btn-primary w-full">
+          Google
+        </button>
       </form>
     </div>
   );
